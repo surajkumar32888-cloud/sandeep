@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>संदीप कम्प्यूटर्स & प्रिन्टर्स - Online Printing & Cyber Cafe Services</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-brand-900 via-indigo-900 to-brand-800 text-white text-xs py-2 px-4 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-indigo-400"></i> <span id="topbar-email">sandeepcomputers@gmail.com</span></span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="font-medium text-emerald-300 flex items-center gap-1"><i class="fa-brands fa-whatsapp text-sm"></i> <span id="topbar-phone">+91 98890 04500</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="bg-white sticky top-0 z-40 border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            <!-- Brand Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-brand-600 flex items-center justify-center text-white text-xl font-bold shadow-md shadow-brand-500/30">
+                    <i class="fa-solid fa-print"></i>
+                </div>
+                <div>
+                    <h1 id="brand-shop-name" class="font-bold text-base sm:text-lg text-slate-900 tracking-tight leading-tight">संदीप कम्प्यूटर्स & प्रिन्टर्स</h1>
+                    <p class="text-[11px] text-slate-500">Online Printing, ID Cards, Flex & Cyber Cafe</p>
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="hidden md:flex flex-1 max-w-md mx-4">
+                <div class="relative w-full">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </span>
+                    <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Search ID cards, flex banner, stamps..." class="w-full pl-10 pr-4 py-2.5 bg-slate-100 focus:bg-white border border-transparent focus:border-brand-500 rounded-xl text-xs outline-none transition">
+                </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="flex items-center gap-3">
+                <span id="shop-timing-badge" class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-semibold">
+                    <i class="fa-solid fa-clock"></i> <span id="header-timing-text">Open: 8:00 AM - 8:00 PM</span>
+                </span>
+                <button onclick="openTrackOrderModal()" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition">
+                    <i class="fa-solid fa-barcode text-brand-600"></i> Track Order
+                </button>
+                <button onclick="openCustomOrderModal()" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs transition shadow-sm">
+                    <i class="fa-solid fa-file-pen"></i> Custom Print Order
+                </button>
+                <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition flex items-center justify-center">
+                    <i class="fa-solid fa-cart-shopping text-base"></i>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-rose-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md scale-0 transition-transform">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- STOREFRONT VIEW -->
+    <div id="storefront-view" class="flex flex-col flex-1">
+        <!-- Hero Banner -->
+        <section class="bg-gradient-to-r from-brand-900 to-indigo-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex flex-col items-center text-center space-y-4">
+                <span class="px-3 py-1 rounded-full bg-white/10 text-brand-200 text-xs font-semibold">
+                    ⚡ Instant WhatsApp Checkout & Digital Downloads
+                </span>
+                <h2 id="hero-title" class="text-2xl sm:text-4xl font-extrabold tracking-tight max-w-2xl leading-tight">
+                    Professional Printing & Design Services at Your Doorstep
+                </h2>
+                <p id="hero-subtitle" class="text-xs sm:text-sm text-slate-300 max-w-xl">
+                    Get high quality PVC ID Cards, Flex Banners, Rubber Stamps, Practical Books & Customized Printing delivered or instantly download design templates.
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Content Catalog -->
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+            
+            <!-- Category Filter Pills -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar" id="category-pills-container">
+                <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Section Title & Count -->
+            <div class="flex justify-between items-center">
+                <h3 id="current-category-title" class="font-bold text-slate-900 text-base">Our Products & Services</h3>
+                <span class="text-xs text-slate-500 font-medium"><span id="product-count">0</span> items</span>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Dynamic products cards -->
+            </div>
+
+            <!-- Custom Job Banner Section -->
+            <div id="custom-job-banner-section" class="bg-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-md flex flex-col md:flex-row items-center justify-between gap-6 my-4">
+                <div class="space-y-2 text-center md:text-left">
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-[10px] font-bold uppercase tracking-wider">Special Service</span>
+                    <h4 class="text-lg sm:text-xl font-bold">Need Custom Printing or Design Work?</h4>
+                    <p class="text-xs text-slate-300 max-w-lg">Got a special flex size, bulk ID card requirement, or custom design? Submit your specifications and files directly to us!</p>
+                </div>
+                <button onclick="openCustomOrderModal()" class="px-5 py-3 bg-white text-brand-900 hover:bg-slate-100 font-bold text-xs rounded-xl transition shadow-sm shrink-0">
+                    <i class="fa-solid fa-file-pen mr-1.5"></i> Custom Job & Printing Order
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ADMIN PANEL VIEW (Hidden by default) -->
+    <div id="admin-view" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+        <!-- Admin Sub Navbar -->
+        <div class="bg-slate-900 text-white p-4 rounded-3xl flex items-center justify-between shadow-md">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white text-sm font-bold">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold text-sm sm:text-base">Admin Control Center</h2>
+                    <p class="text-[10px] text-slate-400">Manage products, categories, orders & shop settings</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="exitAdminPanel()" class="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-store"></i> Return to Storefront
+                </button>
+                <button onclick="logoutAdmin()" class="px-3.5 py-2 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Admin Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
+            <button onclick="switchAdminTab('products')" id="admin-tab-products" class="px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-bold transition whitespace-nowrap shadow-sm">
+                <i class="fa-solid fa-box mr-1.5"></i> Manage Products
+            </button>
+            <button onclick="switchAdminTab('categories')" id="admin-tab-categories" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-bold transition whitespace-nowrap">
+                <i class="fa-solid fa-tags mr-1.5"></i> Manage Categories
+            </button>
+            <button onclick="switchAdminTab('orders')" id="admin-tab-orders" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-bold transition whitespace-nowrap">
+                <i class="fa-solid fa-clipboard-list mr-1.5"></i> Orders & Requests Report
+            </button>
+            <button onclick="switchAdminTab('settings')" id="admin-tab-settings" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-bold transition whitespace-nowrap">
+                <i class="fa-solid fa-gear mr-1.5"></i> Shop Settings
+            </button>
+        </div>
+
+        <!-- TAB 1: MANAGE PRODUCTS -->
+        <div id="admin-panel-products" class="space-y-6">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-brand-600"></i> <span id="product-form-title">Add New Product</span>
+                </h3>
+                <button onclick="resetProductForm()" id="cancel-edit-btn" class="hidden px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-semibold transition">Cancel Edit</button>
+            </div>
+
+            <!-- Product Form -->
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                <input type="hidden" id="edit-product-id">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Product Title *</label>
+                        <input type="text" id="form-p-title" placeholder="e.g. VIP ID Card with Lanyard" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Category *</label>
+                        <select id="form-p-category" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                            <!-- Dynamic categories -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Regular Price / MRP (₹) *</label>
+                        <input type="number" id="form-p-price" placeholder="e.g. 150" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Offer / Sale Price (₹) (Optional)</label>
+                        <input type="number" id="form-p-offerprice" placeholder="e.g. 99" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Product Image (Upload File)</label>
+                        <input type="file" id="form-p-imagefile" accept="image/*" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-500 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Digital Download File (Optional)</label>
+                        <input type="file" id="form-p-downloadfile" accept=".pdf,.zip,.rar,.doc,.docx,.xlsx" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-500 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Product Description</label>
+                    <textarea id="form-p-desc" rows="2" placeholder="Write features, specifications..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none"></textarea>
+                </div>
+                <div class="pt-2 border-t border-slate-100">
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">SEO Code / Meta Tags (Optional)</label>
+                    <input type="text" id="form-p-seo" placeholder='<meta name="keywords" content="id card printing, lanyard">' class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:bg-white outline-none">
+                </div>
+                <div class="flex justify-end pt-2">
+                    <button onclick="saveProductForm()" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                        <i class="fa-solid fa-save mr-1.5"></i> Save Product
+                    </button>
+                </div>
+            </div>
+
+            <!-- Existing Products List -->
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-900 text-sm">Store Products Catalog (<span id="admin-prod-count">0</span>)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="admin-products-list">
+                    <!-- Injected products list -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: MANAGE CATEGORIES -->
+        <div id="admin-panel-categories" class="space-y-6 hidden">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-folder-plus text-brand-600"></i> Add New Category
+                </h3>
+                <div class="flex gap-3">
+                    <input type="text" id="new-category-name" placeholder="e.g. Wedding Cards, Banner Flex" class="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    <button onclick="addNewCategory()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                        Add Category
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-900 text-sm">Existing Categories</h3>
+                <div id="admin-categories-list" class="space-y-2">
+                    <!-- Categories list injected -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ORDERS & REQUESTS REPORT -->
+        <div id="admin-panel-orders" class="space-y-6 hidden">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-list text-brand-600"></i> Customer Orders & Custom Print Requests
+                    </h3>
+                    <button onclick="renderAdminOrdersReport()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition">
+                        <i class="fa-solid fa-rotate mr-1"></i> Refresh
+                    </button>
+                </div>
+                <div id="admin-orders-list" class="space-y-4">
+                    <!-- Orders injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SHOP SETTINGS -->
+        <div id="admin-panel-settings" class="space-y-6 hidden">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-shop text-brand-600"></i> Shop Information & Contact Details
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Shop Name *</label>
+                        <input type="text" id="setting-shop-name" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">WhatsApp Phone Number (with Country Code) *</label>
+                        <input type="text" id="setting-phone" placeholder="919889004500" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Email Address</label>
+                        <input type="email" id="setting-email" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Admin Security PIN (4 digits) *</label>
+                        <input type="text" id="setting-pin" maxlength="4" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Shop Timings (Opening & Closing Hours) *</label>
+                        <input type="text" id="setting-timings" placeholder="e.g. 8:00 AM - 8:00 PM (Mon - Sat)" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Shop Address *</label>
+                    <textarea id="setting-address" rows="2" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none"></textarea>
+                </div>
+
+                <!-- WhatsApp Message Templates Customizer -->
+                <div class="border-t border-slate-200 pt-6 space-y-4">
+                    <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-600"></i> WhatsApp Message Templates Customizer
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Order Confirmation Template</label>
+                            <textarea id="setting-template-confirmed" rows="4" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-brand-500/20 bg-white" placeholder="Use {customerName}, {shopName}, {amount}"></textarea>
+                            <span class="text-[10px] text-slate-400 mt-1 block">Variables: {customerName}, {shopName}, {trackingNo}, {amount}</span>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Ready to Dispatch Template</label>
+                            <textarea id="setting-template-dispatched" rows="4" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-brand-500/20 bg-white" placeholder="Use {customerName}, {shopName}, {trackingNo}"></textarea>
+                            <span class="text-[10px] text-slate-400 mt-1 block">Variables: {customerName}, {shopName}, {trackingNo}</span>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Order Rejection Template</label>
+                            <textarea id="setting-template-rejected" rows="4" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-brand-500/20 bg-white" placeholder="Use {customerName}, {shopName}"></textarea>
+                            <span class="text-[10px] text-slate-400 mt-1 block">Variables: {customerName}, {shopName}, {trackingNo}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex justify-end">
+                    <button onclick="saveShopSettings()" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                        <i class="fa-solid fa-floppy-disk mr-1.5"></i> Save Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin PIN Authentication Modal -->
+    <div id="admin-auth-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 text-center">
+            <div class="w-16 h-16 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center mx-auto text-2xl shadow-inner">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="space-y-1">
+                <h3 class="font-bold text-slate-900 text-xl">Admin Authentication</h3>
+                <p class="text-xs text-slate-500">Enter your 4-digit admin security PIN (Default: 1234)</p>
+            </div>
+            <div>
+                <input type="password" id="auth-pin-input" maxlength="4" placeholder="••••" class="w-full text-center px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-2xl font-mono tracking-widest focus:bg-white outline-none focus:ring-2 focus:ring-brand-500/20">
+            </div>
+            <div class="space-y-2">
+                <button onclick="verifyAuthPin()" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-bold text-xs transition shadow-lg shadow-brand-600/30">
+                    Login to Control Center
+                </button>
+                <button onclick="closeAdminAuthModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-bold text-xs transition">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs mt-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-3 md:col-span-2">
+                <div class="flex items-center gap-3 text-white">
+                    <div class="w-8 h-8 rounded-xl bg-brand-600 flex items-center justify-center font-bold text-sm">
+                        <i class="fa-solid fa-print"></i>
+                    </div>
+                    <h4 id="footer-shop-name" class="font-bold text-base">संदीप कम्प्यूटर्स & प्रिन्टर्स</h4>
+                </div>
+                <p id="footer-address" class="text-xs leading-relaxed max-w-sm text-slate-400">
+                    पाठक पुरवा चौराहा, अमारी बाजार, बस्ती, UP
+                </p>
+                <p class="text-[11px] text-slate-500">© 2026 Sandeep Computers & Printers. All rights reserved.</p>
+            </div>
+            <div class="space-y-2">
+                <h4 class="font-bold text-white text-xs uppercase tracking-wider">Quick Links</h4>
+                <ul class="space-y-1.5 text-xs">
+                    <li><a href="#storefront-view" onclick="filterCategory('All')" class="hover:text-white transition">All Products</a></li>
+                    <li><a href="#storefront-view" onclick="filterCategory('Customized Item')" class="hover:text-white transition">Customized Items & Printing</a></li>
+                    <li><button onclick="openTrackOrderModal()" class="hover:text-white transition text-left">Track Order Status</button></li>
+                    <li><button onclick="openAdminAuthModal()" class="text-brand-400 hover:text-white transition text-left font-semibold">Admin Login</button></li>
+                </ul>
+            </div>
+            <div class="space-y-2">
+                <h4 class="font-bold text-white text-xs uppercase tracking-wider">Contact & Support</h4>
+                <p class="text-xs text-emerald-400 font-semibold flex items-center gap-1.5"><i class="fa-brands fa-whatsapp text-sm"></i> <span id="footer-phone">+91 98890 04500</span></p>
+                <p class="text-xs text-slate-400 flex items-center gap-1.5"><i class="fa-solid fa-envelope"></i> <span id="footer-email">sandeepcomputers@gmail.com</span></p>
+                <p id="footer-timings" class="text-[11px] text-slate-500 pt-1">Open Mon - Sat: 8:00 AM - 8:00 PM</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer Modal -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col transform transition-transform duration-300">
+            <!-- Header -->
+            <div class="p-4 sm:p-6 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-brand-600"></i> Your Shopping Cart (<span id="cart-item-count">0</span>)
+                </h4>
+                <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+
+            <!-- Items List -->
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 custom-scrollbar">
+                <!-- Dynamic Cart Items -->
+            </div>
+
+            <!-- Checkout Form & Footer -->
+            <div class="p-4 sm:p-6 border-t border-slate-200 bg-slate-50 space-y-4">
+                <div class="space-y-3">
+                    <h5 class="font-bold text-slate-900 text-xs">Customer Delivery Details</h5>
+                    <input type="text" id="checkout-name" placeholder="Your Full Name *" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500/20 outline-none">
+                    <input type="text" id="checkout-phone" placeholder="WhatsApp Phone Number *" class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500/20 outline-none">
+                    <textarea id="checkout-address" rows="2" placeholder="Complete Delivery Address or Notes *" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-brand-500/20 outline-none"></textarea>
+                </div>
+
+                <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+                    <span class="text-xs text-slate-500 font-medium">Total Amount:</span>
+                    <span id="cart-total-price" class="font-black text-brand-600 text-base">₹0</span>
+                </div>
+
+                <button onclick="checkoutToWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Send Order to WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Print Order Modal -->
+    <div id="custom-order-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-4 sm:p-6 bg-slate-900 text-white flex items-center justify-between">
+                <h4 class="font-bold text-sm sm:text-base flex items-center gap-2">
+                    <i class="fa-solid fa-file-pen text-brand-400"></i> Custom Job & Printing Order Request
+                </h4>
+                <button onclick="closeCustomOrderModal()" class="p-1.5 text-slate-400 hover:text-white rounded-xl">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+            <div class="p-4 sm:p-6 overflow-y-auto space-y-4 custom-scrollbar">
+                <p class="text-xs text-slate-500">Need something specific like flex banners with exact custom size, bulk exam forms, visiting cards, or custom design? Fill the form below.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Full Name *</label>
+                        <input type="text" id="custom-name" placeholder="Enter your name" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">WhatsApp Phone *</label>
+                        <input type="text" id="custom-phone" placeholder="988900xxxx" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Service Type *</label>
+                    <select id="custom-type" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none">
+                        <option value="Flex & Banner Printing">Flex & Banner Printing</option>
+                        <option value="ID Cards & Lanyards">ID Cards & Lanyards (Bulk)</option>
+                        <option value="Rubber Stamp">Rubber Stamp / Seal</option>
+                        <option value="Cyber Cafe / Online Form">Cyber Cafe / Online Exam Form</option>
+                        <option value="Other Custom Design">Other Custom Design / Printing</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Detailed Requirements *</label>
+                    <textarea id="custom-details" rows="3" placeholder="Specify dimensions (e.g. 6x3 ft flex), quantity, color, text content..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Upload Reference Image / Design File (Optional)</label>
+                    <input type="file" id="custom-file" accept="image/*,.pdf,.cdr,.psd" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-500 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Delivery Address / Location *</label>
+                    <textarea id="custom-address" rows="2" placeholder="Your address for dispatch / store pickup" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:bg-white outline-none"></textarea>
+                </div>
+            </div>
+            <div class="p-4 sm:p-6 border-t border-slate-200 bg-slate-50 flex justify-end gap-3">
+                <button onclick="closeCustomOrderModal()" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-bold transition">Cancel</button>
+                <button onclick="submitCustomOrder()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Send Request to WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Track Order Modal -->
+    <div id="track-order-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+            <div class="p-4 sm:p-6 bg-slate-900 text-white flex items-center justify-between">
+                <h4 class="font-bold text-sm sm:text-base flex items-center gap-2">
+                    <i class="fa-solid fa-barcode text-brand-400"></i> Track Your Order Status
+                </h4>
+                <button onclick="closeTrackOrderModal()" class="p-1.5 text-slate-400 hover:text-white rounded-xl">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+            <div class="p-4 sm:p-6 space-y-4">
+                <p class="text-xs text-slate-500">Enter your Tracking Number (e.g. SCP-1234 or CUST-5678) to check status.</p>
+                <div class="flex gap-2">
+                    <input type="text" id="track-input-id" placeholder="Enter Tracking No..." class="flex-1 px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs uppercase tracking-wider font-mono outline-none focus:bg-white">
+                    <button onclick="performOrderTracking()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                        Track
+                    </button>
+                </div>
+                <div id="track-result-container" class="pt-2">
+                    <!-- Tracking result shows here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-2xl text-xs shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toast-message">Action completed successfully!</span>
+    </div>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        const defaultSettings = {
+            shopName: "संदीप कम्प्यूटर्स & प्रिन्टर्स",
+            phone: "919889004500",
+            displayPhone: "+91 98890 04500",
+            email: "sandeepcomputers@gmail.com",
+            address: "पाठक पुरवा चौराहा, अमारी बाजार, बस्ती, UP",
+            timings: "8:00 AM - 8:00 PM (Mon - Sat)",
+            adminPin: "1234",
+            templateConfirmed: "📢 *Order Status Update - {shopName}*\n\nHello *{customerName}*,\n\n🎫 Tracking No: *{trackingNo}*\n✅ Great news! Your order / custom print request has been *CONFIRMED* by our store manager.\n💰 Total Amount: *₹{amount}*\n\n{downloadSection}\n\nWe are processing your work now. Thank you for choosing {shopName}! 🙏",
+            templateDispatched: "🚚 *Order Dispatched - {shopName}*\n\nHello *{customerName}*,\n\n🎫 Tracking No: *{trackingNo}*\n📦 Great news! Your order / custom print request is now *READY TO DISPATCH* / shipped.\n\nThank you for choosing {shopName}! 🙏",
+            templateRejected: "📢 *Order Status Update - {shopName}*\n\nHello *{customerName}*,\n\n🎫 Tracking No: *{trackingNo}*\n❌ Regrettably, your order / custom print request has been *REJECTED* or could not be fulfilled at this moment.\n\nPlease feel free to contact us on WhatsApp for any queries. Thank you!"
+        };
+
+        const defaultCategories = ["All", "Customized Item", "ID Cards & Lanyards", "Flex & Banners", "Stamps & Seals", "School Stationery", "Digital / Downloadable"];
+
+        const defaultProducts = [
+            {
+                id: 1,
+                title: "VIP PVC ID Card with Lanyard",
+                category: "ID Cards & Lanyards",
+                price: 99,
+                offerPrice: 79,
+                image: "https://placehold.co/400x300/6366f1/ffffff?text=VIP+ID+Card",
+                downloadFile: "",
+                desc: "High quality gloss laminated PVC ID card with custom branded neck lanyard.",
+                seo: '<meta name="keywords" content="id card printing, lanyard, school id">'
+            },
+            {
+                id: 2,
+                title: "Customized Flex Banner Printing (Per Sq Ft)",
+                category: "Customized Item",
+                price: 15,
+                offerPrice: 12,
+                image: "https://placehold.co/400x300/4f46e5/ffffff?text=Flex+Banner",
+                downloadFile: "",
+                desc: "High resolution solvent flex banner printing for shops, events and weddings.",
+                seo: '<meta name="keywords" content="flex banner printing, hoarding, shop banner">'
+            },
+            {
+                id: 3,
+                title: "Self-Inking Rubber Stamp (Pre-Inked)",
+                category: "Stamps & Seals",
+                price: 250,
+                offerPrice: 199,
+                image: "https://placehold.co/400x300/3730a3/ffffff?text=Rubber+Stamp",
+                downloadFile: "",
+                desc: "Long lasting pre-inked rubber stamp for office, school, business and signature.",
+                seo: '<meta name="keywords" content="rubber stamp, pre inked seal, signature stamp">'
+            },
+            {
+                id: 4,
+                title: "School Practical Note Books (Bundle of 5)",
+                category: "School Stationery",
+                price: 200,
+                offerPrice: 160,
+                image: "https://placehold.co/400x300/4338ca/ffffff?text=Practical+NoteBooks",
+                downloadFile: "",
+                desc: "High quality ruled and unruled practical notebooks for students.",
+                seo: '<meta name="keywords" content="school stationery, practical notebooks, books">'
+            },
+            {
+                id: 5,
+                title: "Professional Resume & Biodata Design Template (PDF)",
+                category: "Digital / Downloadable",
+                price: 50,
+                offerPrice: 29,
+                image: "https://placehold.co/400x300/312e81/ffffff?text=Resume+Template",
+                downloadFile: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                desc: "Editable professional resume template in PDF & Word format with instant download.",
+                seo: '<meta name="keywords" content="resume template, biodata pdf, cv download">'
+            }
+        ];
+
+        let shopSettings = JSON.parse(localStorage.getItem('sandeep_shop_settings')) || defaultSettings;
+        let categories = JSON.parse(localStorage.getItem('sandeep_store_categories')) || defaultCategories;
+        let products = JSON.parse(localStorage.getItem('sandeep_store_products')) || defaultProducts;
+        let storeOrders = JSON.parse(localStorage.getItem('sandeep_store_orders')) || [];
+        let cart = [];
+        let currentCategory = "All";
+        let searchQuery = "";
+
+        window.onload = function() {
+            applyShopSettingsToUI();
+            renderCategoryPills();
+            renderProducts();
+            updateCartBadge();
+            if (sessionStorage.getItem('sandeep_admin_auth') === 'true') {
+                openAdminPanelDirect();
+            }
+        };
+
+        function applyShopSettingsToUI() {
+            if(document.getElementById('brand-shop-name')) document.getElementById('brand-shop-name').textContent = shopSettings.shopName;
+            if(document.getElementById('footer-shop-name')) document.getElementById('footer-shop-name').textContent = shopSettings.shopName;
+            if(document.getElementById('topbar-phone')) document.getElementById('topbar-phone').textContent = shopSettings.displayPhone || shopSettings.phone;
+            if(document.getElementById('footer-phone')) document.getElementById('footer-phone').textContent = shopSettings.displayPhone || shopSettings.phone;
+            if(document.getElementById('topbar-email')) document.getElementById('topbar-email').textContent = shopSettings.email || "sandeepcomputers@gmail.com";
+            if(document.getElementById('footer-email')) document.getElementById('footer-email').textContent = shopSettings.email || "sandeepcomputers@gmail.com";
+            if(document.getElementById('footer-address')) document.getElementById('footer-address').textContent = shopSettings.address;
+            if(document.getElementById('header-timing-text')) document.getElementById('header-timing-text').textContent = "Open: " + (shopSettings.timings || "8:00 AM - 8:00 PM");
+            if(document.getElementById('footer-timings')) document.getElementById('footer-timings').textContent = "Open: " + (shopSettings.timings || "8:00 AM - 8:00 PM");
+        }
+
+        function showToast(msg, type = "success") {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        // Admin Auth Modal & Panel Navigation
+        function openAdminAuthModal() {
+            if (sessionStorage.getItem('sandeep_admin_auth') === 'true') {
+                openAdminPanelDirect();
+                return;
+            }
+            document.getElementById('admin-auth-modal').classList.remove('hidden');
+            document.getElementById('admin-auth-modal').classList.add('flex');
+        }
+
+        function closeAdminAuthModal() {
+            document.getElementById('admin-auth-modal').classList.add('hidden');
+            document.getElementById('admin-auth-modal').classList.remove('flex');
+        }
+
+        function verifyAuthPin() {
+            const pin = document.getElementById('auth-pin-input').value.trim();
+            if (pin === shopSettings.adminPin) {
+                sessionStorage.setItem('sandeep_admin_auth', 'true');
+                closeAdminAuthModal();
+                openAdminPanelDirect();
+                showToast("Admin login successful!");
+            } else {
+                showToast("Incorrect PIN! Try 1234", "error");
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('sandeep_admin_auth');
+            document.getElementById('auth-pin-input').value = "";
+            exitAdminPanel();
+            showToast("Logged out from Admin successfully!");
+        }
+
+        function openAdminPanelDirect() {
+            document.getElementById('storefront-view').classList.add('hidden');
+            document.getElementById('admin-view').classList.remove('hidden');
+            populateCategorySelect();
+            renderAdminProductsList();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function exitAdminPanel() {
+            document.getElementById('admin-view').classList.add('hidden');
+            document.getElementById('storefront-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchAdminTab(tabName) {
+            const tabs = ['products', 'categories', 'orders', 'settings'];
+            tabs.forEach(t => {
+                const panel = document.getElementById(`admin-panel-${t}`);
+                const btn = document.getElementById(`admin-tab-${t}`);
+                if (panel) panel.classList.add('hidden');
+                if (btn) {
+                    btn.className = "px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-bold transition whitespace-nowrap";
+                }
+            });
+
+            const activePanel = document.getElementById(`admin-panel-${tabName}`);
+            const activeBtn = document.getElementById(`admin-tab-${tabName}`);
+            if (activePanel) activePanel.classList.remove('hidden');
+            if (activeBtn) {
+                activeBtn.className = "px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-bold transition whitespace-nowrap shadow-sm";
+            }
+
+            if (tabName === 'products') renderAdminProductsList();
+            if (tabName === 'categories') renderAdminCategoriesList();
+            if (tabName === 'orders') renderAdminOrdersReport();
+            if (tabName === 'settings') loadShopSettingsToForm();
+        }
+
+        // Storefront Rendering & Cart
+        function renderCategoryPills() {
+            const container = document.getElementById('category-pills-container');
+            if (!container) return;
+
+            container.innerHTML = categories.map(cat => `
+                <button onclick="filterCategory('${cat}')" class="px-4 py-2 rounded-2xl text-xs font-bold transition whitespace-nowrap ${currentCategory === cat ? 'bg-brand-600 text-white shadow-md shadow-brand-600/20' : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'}">
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            if(document.getElementById('current-category-title')) {
+                document.getElementById('current-category-title').textContent = cat === 'All' ? 'All Products & Services' : cat;
+            }
+            renderCategoryPills();
+            renderProducts();
+        }
+
+        function handleSearch(query) {
+            searchQuery = query.toLowerCase().trim();
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const countEl = document.getElementById('product-count');
+            if (!grid) return;
+
+            let filtered = products.filter(p => {
+                const matchesCat = (currentCategory === 'All' || p.category === currentCategory);
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            if(countEl) countEl.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-16 text-center text-slate-400 text-xs">No products found matching your search.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => {
+                const effectivePrice = p.offerPrice && p.offerPrice < p.price ? p.offerPrice : p.price;
+                const hasDiscount = p.offerPrice && p.offerPrice < p.price;
+                const isCustom = p.category === 'Customized Item';
+
+                return `
+                <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition flex flex-col group">
+                    <div class="relative bg-slate-100 h-48 overflow-hidden">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/6366f1/ffffff?text=Product'">
+                        <span class="absolute top-3 left-3 px-2.5 py-1 bg-white/90 backdrop-blur-md rounded-xl text-[10px] font-bold text-brand-700 shadow-sm">${p.category}</span>
+                        ${hasDiscount ? `<span class="absolute top-3 right-3 px-2.5 py-1 bg-rose-600 text-white rounded-xl text-[10px] font-bold shadow-sm">Sale</span>` : ''}
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="space-y-1.5">
+                            <h4 class="font-bold text-slate-900 text-sm line-clamp-1">${p.title}</h4>
+                            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">${p.desc}</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                            <div>
+                                <span class="font-black text-brand-600 text-base">₹${effectivePrice}</span>
+                                ${hasDiscount ? `<span class="text-xs text-slate-400 line-through ml-1.5">₹${p.price}</span>` : ''}
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                ${p.downloadFile ? `<a href="${p.downloadFile}" download class="p-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-xs transition" title="Download Digital File"><i class="fa-solid fa-download"></i></a>` : ''}
+                                ${isCustom ? `<button onclick="openCustomOrderModalForProduct('${p.title.replace(/'/g, "\\'")}')" class="px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 shadow-sm"><i class="fa-solid fa-file-pen"></i> Order Print</button>` : `<button onclick="addToCart(${p.id})" class="px-3 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 shadow-sm"><i class="fa-solid fa-cart-plus"></i> Add</button>`}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function addToCart(productId) {
+            const prod = products.find(p => p.id === productId);
+            if (!prod) return;
+
+            const effectivePrice = prod.offerPrice && prod.offerPrice < prod.price ? prod.offerPrice : prod.price;
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    id: prod.id,
+                    title: prod.title,
+                    price: effectivePrice,
+                    image: prod.image,
+                    qty: 1
+                });
+            }
+
+            updateCartBadge();
+            showToast(`Added "${prod.title}" to cart!`);
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-badge');
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            if (badge) {
+                badge.textContent = totalQty;
+                if (totalQty > 0) {
+                    badge.classList.remove('scale-0');
+                    badge.classList.add('scale-100');
+                } else {
+                    badge.classList.add('scale-0');
+                    badge.classList.remove('scale-100');
+                }
+            }
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            if (!drawer) return;
+
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                drawer.classList.add('flex');
+                renderCartItems();
+            } else {
+                drawer.classList.add('hidden');
+                drawer.classList.remove('flex');
+            }
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            const countEl = document.getElementById('cart-item-count');
+            const totalEl = document.getElementById('cart-total-price');
+            if (!container) return;
+
+            if (countEl) countEl.textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-16 text-slate-400 text-xs">Your cart is empty.</div>`;
+                if (totalEl) totalEl.textContent = '₹0';
+                return;
+            }
+
+            let totalPrice = 0;
+            container.innerHTML = cart.map(item => {
+                totalPrice += item.price * item.qty;
+                return `
+                <div class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-2xl">
+                    <img src="${item.image}" alt="${item.title}" class="w-14 h-14 object-cover rounded-xl bg-white">
+                    <div class="flex-1 min-w-0">
+                        <h5 class="font-bold text-slate-900 text-xs truncate">${item.title}</h5>
+                        <p class="text-xs text-brand-600 font-bold mt-0.5">₹${item.price} × ${item.qty}</p>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <button onclick="changeCartQty(${item.id}, -1)" class="w-7 h-7 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold text-xs hover:bg-slate-100">-</button>
+                        <span class="w-6 text-center text-xs font-bold">${item.qty}</span>
+                        <button onclick="changeCartQty(${item.id}, 1)" class="w-7 h-7 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold text-xs hover:bg-slate-100">+</button>
+                    </div>
+                </div>
+            `;
+            }).join('');
+
+            if (totalEl) totalEl.textContent = '₹' + totalPrice;
+        }
+
+        function changeCartQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            renderCartItems();
+            updateCartBadge();
+        }
+
+        function checkoutToWhatsApp() {
+            const name = document.getElementById('checkout-name')?.value.trim();
+            const phone = document.getElementById('checkout-phone')?.value.trim();
+            const address = document.getElementById('checkout-address')?.value.trim();
+
+            if (!name || !phone || !address) {
+                showToast("Please fill in your Name, Phone and Delivery Address!", "error");
+                return;
+            }
+
+            if (cart.length === 0) {
+                showToast("Your cart is empty!", "error");
+                return;
+            }
+
+            let totalPrice = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            let trackingNo = "SCP-" + Math.floor(1000 + Math.random() * 9000);
+
+            let itemsText = cart.map(i => `• ${i.title} (Qty: ${i.qty}) - ₹${i.price * i.qty}`).join('\n');
+
+            let msg = `🛍️ *New Order Received - ${shopSettings.shopName}*\n\n` +
+                      `🎫 Tracking No: *${trackingNo}*\n` +
+                      `👤 Customer: *${name}*\n` +
+                      `📞 Phone: *${phone}*\n` +
+                      `📍 Address: *${address}*\n\n` +
+                      `🛒 *Order Items:*\n${itemsText}\n\n` +
+                      `💰 Total Amount: *₹${totalPrice}*\n\n` +
+                      `Please confirm my order. Thank you! 🙏`;
+
+            const newOrderObj = {
+                id: Date.now(),
+                trackingNo,
+                type: "Store Order",
+                customerName: name,
+                customerPhone: phone,
+                customerAddress: address,
+                details: cart.map(i => `${i.title} (x${i.qty})`).join(', '),
+                amount: totalPrice,
+                file: "",
+                status: "Pending",
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            };
+
+            storeOrders.unshift(newOrderObj);
+            localStorage.setItem('sandeep_store_orders', JSON.stringify(storeOrders));
+
+            let cleanShopPhone = shopSettings.phone.replace(/\D/g, '');
+            const waUrl = `https://wa.me/${cleanShopPhone}?text=${encodeURIComponent(msg)}`;
+
+            cart = [];
+            updateCartBadge();
+            toggleCartDrawer();
+
+            window.open(waUrl, '_blank');
+            showToast("Order sent to WhatsApp successfully!");
+        }
+
+        // Custom Print Order Modal
+        function openCustomOrderModal() {
+            document.getElementById('custom-order-modal').classList.remove('hidden');
+            document.getElementById('custom-order-modal').classList.add('flex');
+        }
+
+        function openCustomOrderModalForProduct(productTitle) {
+            openCustomOrderModal();
+            const detailsField = document.getElementById('custom-details');
+            if (detailsField) {
+                detailsField.value = `I want to order custom printing for: ${productTitle}. `;
+            }
+        }
+
+        function closeCustomOrderModal() {
+            document.getElementById('custom-order-modal').classList.add('hidden');
+            document.getElementById('custom-order-modal').classList.remove('flex');
+        }
+
+        // Track Order Modal
+        function openTrackOrderModal() {
+            document.getElementById('track-order-modal').classList.remove('hidden');
+            document.getElementById('track-order-modal').classList.add('flex');
+        }
+
+        function closeTrackOrderModal() {
+            document.getElementById('track-order-modal').classList.add('hidden');
+            document.getElementById('track-order-modal').classList.remove('flex');
+            document.getElementById('track-input-id').value = "";
+            document.getElementById('track-result-container').innerHTML = "";
+        }
+
+        function performOrderTracking() {
+            const queryId = document.getElementById('track-input-id')?.value.trim().toUpperCase();
+            const resContainer = document.getElementById('track-result-container');
+            if (!queryId) {
+                showToast("Please enter a tracking number!", "error");
+                return;
+            }
+
+            const found = storeOrders.find(o => (o.trackingNo || "").toUpperCase() === queryId || String(o.id) === queryId);
+            if (!found) {
+                resContainer.innerHTML = `<div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-700 text-xs text-center">No order found with tracking number: <strong>${queryId}</strong></div>`;
+                return;
+            }
+
+            let badgeColor = "bg-amber-100 text-amber-800";
+            let statusIcon = "fa-clock";
+            if (found.status === 'Confirmed') {
+                badgeColor = "bg-emerald-100 text-emerald-800";
+                statusIcon = "fa-check";
+            } else if (found.status === 'Ready to Dispatch') {
+                badgeColor = "bg-blue-100 text-blue-800";
+                statusIcon = "fa-truck-fast";
+            } else if (found.status === 'Rejected') {
+                badgeColor = "bg-rose-100 text-rose-800";
+                statusIcon = "fa-xmark";
+            }
+
+            resContainer.innerHTML = `
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="font-mono font-bold text-xs text-brand-600">${found.trackingNo}</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${badgeColor}"><i class="fa-solid ${statusIcon} mr-1"></i>${found.status || 'Pending'}</span>
+                    </div>
+                    <div class="text-xs space-y-1 pt-1">
+                        <p><strong>Customer:</strong> ${found.customerName}</p>
+                        <p><strong>Type:</strong> ${found.type}</p>
+                        <p><strong>Details:</strong> ${found.details}</p>
+                        <p><strong>Date:</strong> ${found.date}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitCustomOrder() {
+            const name = document.getElementById('custom-name')?.value.trim();
+            const phone = document.getElementById('custom-phone')?.value.trim();
+            const type = document.getElementById('custom-type')?.value;
+            const details = document.getElementById('custom-details')?.value.trim();
+            const address = document.getElementById('custom-address')?.value.trim();
+            const fileInput = document.getElementById('custom-file');
+
+            if (!name || !phone || !details || !address) {
+                showToast("Please fill in all mandatory fields!", "error");
+                return;
+            }
+
+            const trackingNo = "CUST-" + Math.floor(1000 + Math.random() * 9000);
+            let fileUrl = "";
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                fileUrl = URL.createObjectURL(fileInput.files[0]);
+            }
+
+            let msg = `✨ *Custom Print Order Request - ${shopSettings.shopName}*\n\n` +
+                      `🎫 Tracking No: *${trackingNo}*\n` +
+                      `👤 Customer: *${name}*\n` +
+                      `📞 Phone: *${phone}*\n` +
+                      `🏷️ Service: *${type}*\n` +
+                      `📝 Details: *${details}*\n` +
+                      `📍 Address: *${address}*\n\n` +
+                      (fileUrl ? `📎 Reference File Attached\n\n` : '') +
+                      `Please review my request and provide quotation. Thank you!`;
+
+            const newOrderObj = {
+                id: Date.now(),
+                trackingNo,
+                type: `Custom: ${type}`,
+                customerName: name,
+                customerPhone: phone,
+                customerAddress: address,
+                details: details,
+                amount: 0,
+                file: fileUrl,
+                status: "Pending",
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            };
+            storeOrders.unshift(newOrderObj);
+            localStorage.setItem('sandeep_store_orders', JSON.stringify(storeOrders));
+
+            closeCustomOrderModal();
+
+            let cleanShopPhone = shopSettings.phone.replace(/\D/g, '');
+            const waUrl = `https://wa.me/${cleanShopPhone}?text=${encodeURIComponent(msg)}`;
+            window.open(waUrl, '_blank');
+            showToast("Custom order request sent successfully!");
+        }
+
+        // Admin Management Logic
+        function populateCategorySelect() {
+            const formCat = document.getElementById('form-p-category');
+            if (formCat) {
+                formCat.innerHTML = categories.filter(c => c !== 'All').map(c => `<option value="${c}">${c}</option>`).join('');
+            }
+        }
+
+        function renderAdminProductsList() {
+            const list = document.getElementById('admin-products-list');
+            const countEl = document.getElementById('admin-prod-count');
+            if (!list) return;
+
+            if (countEl) countEl.textContent = products.length;
+
+            if (products.length === 0) {
+                list.innerHTML = `<p class="text-xs text-slate-400 col-span-full py-4 text-center">No products added yet.</p>`;
+                return;
+            }
+
+            list.innerHTML = products.map(p => `
+                <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-3">
+                    <img src="${p.image}" alt="${p.title}" class="w-12 h-12 object-cover rounded-xl bg-white">
+                    <div class="flex-1 min-w-0">
+                        <h5 class="font-bold text-slate-900 text-xs truncate">${p.title}</h5>
+                        <p class="text-[11px] text-brand-600 font-bold">₹${p.offerPrice && p.offerPrice < p.price ? p.offerPrice : p.price} <span class="text-slate-400 font-normal">(${p.category})</span></p>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <button onclick="editProduct(${p.id})" class="p-2 bg-indigo-50 hover:bg-indigo-100 text-brand-700 rounded-lg text-xs transition" title="Edit"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteProduct(${p.id})" class="p-2 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs transition" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveProductForm() {
+            const editId = document.getElementById('edit-product-id')?.value;
+            const title = document.getElementById('form-p-title')?.value.trim();
+            const category = document.getElementById('form-p-category')?.value;
+            const price = parseFloat(document.getElementById('form-p-price')?.value);
+            const offerPrice = parseFloat(document.getElementById('form-p-offerprice')?.value) || 0;
+            const desc = document.getElementById('form-p-desc')?.value.trim();
+            const seo = document.getElementById('form-p-seo')?.value.trim();
+            const imageFile = document.getElementById('form-p-imagefile');
+            const downloadFile = document.getElementById('form-p-downloadfile');
+
+            if (!title || !category || isNaN(price)) {
+                showToast("Please fill in Title, Category and Price!", "error");
+                return;
+            }
+
+            let imageUrl = "https://placehold.co/400x300/6366f1/ffffff?text=" + encodeURIComponent(title);
+            if (imageFile && imageFile.files && imageFile.files[0]) {
+                imageUrl = URL.createObjectURL(imageFile.files[0]);
+            }
+
+            let downloadUrl = "";
+            if (downloadFile && downloadFile.files && downloadFile.files[0]) {
+                downloadUrl = URL.createObjectURL(downloadFile.files[0]);
+            }
+
+            if (editId) {
+                const prod = products.find(p => p.id == editId);
+                if (prod) {
+                    prod.title = title;
+                    prod.category = category;
+                    prod.price = price;
+                    prod.offerPrice = offerPrice;
+                    prod.desc = desc;
+                    prod.seo = seo;
+                    if (imageFile && imageFile.files && imageFile.files[0]) prod.image = imageUrl;
+                    if (downloadFile && downloadFile.files && downloadFile.files[0]) prod.downloadFile = downloadUrl;
+                }
+                showToast("Product updated successfully!");
+            } else {
+                const newProd = {
+                    id: Date.now(),
+                    title,
+                    category,
+                    price,
+                    offerPrice,
+                    image: imageUrl,
+                    downloadFile: downloadUrl,
+                    desc: desc || "High quality printing & cyber cafe service.",
+                    seo: seo || ""
+                };
+                products.unshift(newProd);
+                showToast("New product added successfully!");
+            }
+
+            localStorage.setItem('sandeep_store_products', JSON.stringify(products));
+            resetProductForm();
+            renderAdminProductsList();
+            renderProducts();
+        }
+
+        function editProduct(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+
+            document.getElementById('edit-product-id').value = prod.id;
+            document.getElementById('form-p-title').value = prod.title;
+            document.getElementById('form-p-category').value = prod.category;
+            document.getElementById('form-p-price').value = prod.price;
+            document.getElementById('form-p-offerprice').value = prod.offerPrice || "";
+            document.getElementById('form-p-desc').value = prod.desc;
+            document.getElementById('form-p-seo').value = prod.seo || "";
+            document.getElementById('product-form-title').textContent = "Edit Product: " + prod.title;
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetProductForm() {
+            document.getElementById('edit-product-id').value = "";
+            document.getElementById('form-p-title').value = "";
+            document.getElementById('form-p-price').value = "";
+            document.getElementById('form-p-offerprice').value = "";
+            document.getElementById('form-p-desc').value = "";
+            document.getElementById('form-p-seo').value = "";
+            if(document.getElementById('form-p-imagefile')) document.getElementById('form-p-imagefile').value = "";
+            if(document.getElementById('form-p-downloadfile')) document.getElementById('form-p-downloadfile').value = "";
+            document.getElementById('product-form-title').textContent = "Add New Product";
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+        }
+
+        function deleteProduct(id) {
+            products = products.filter(p => p.id !== id);
+            localStorage.setItem('sandeep_store_products', JSON.stringify(products));
+            renderAdminProductsList();
+            renderProducts();
+            showToast("Product deleted successfully!");
+        }
+
+        function renderAdminCategoriesList() {
+            const list = document.getElementById('admin-categories-list');
+            if (!list) return;
+
+            list.innerHTML = categories.filter(c => c !== 'All').map(c => `
+                <div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                    <span class="font-bold text-slate-800 text-xs">${c}</span>
+                    <button onclick="deleteCategory('${c}')" class="px-3 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-semibold transition">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function addNewCategory() {
+            const input = document.getElementById('new-category-name');
+            const name = input?.value.trim();
+            if (!name) {
+                showToast("Please enter a category name!", "error");
+                return;
+            }
+            if (categories.includes(name)) {
+                showToast("Category already exists!", "error");
+                return;
+            }
+            categories.push(name);
+            localStorage.setItem('sandeep_store_categories', JSON.stringify(categories));
+            input.value = "";
+            populateCategorySelect();
+            renderCategoryPills();
+            renderAdminCategoriesList();
+            showToast("Category added successfully!");
+        }
+
+        function deleteCategory(catName) {
+            categories = categories.filter(c => c !== catName);
+            localStorage.setItem('sandeep_store_categories', JSON.stringify(categories));
+            populateCategorySelect();
+            renderCategoryPills();
+            renderAdminCategoriesList();
+            showToast("Category deleted successfully!");
+        }
+
+        function renderAdminOrdersReport() {
+            const list = document.getElementById('admin-orders-list');
+            if (!list) return;
+
+            if (storeOrders.length === 0) {
+                list.innerHTML = `<p class="text-xs text-slate-400 text-center py-8">No orders or custom requests received yet.</p>`;
+                return;
+            }
+
+            list.innerHTML = storeOrders.map(o => {
+                if(!o.trackingNo) {
+                    o.trackingNo = "SCP-" + Math.floor(1000 + (o.id % 9000));
+                }
+                let statusBadge = '<span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">Pending Review</span>';
+                if (o.status === 'Confirmed') {
+                    statusBadge = '<span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800"><i class="fa-solid fa-check mr-1"></i>Confirmed</span>';
+                } else if (o.status === 'Ready to Dispatch') {
+                    statusBadge = '<span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800"><i class="fa-solid fa-truck-fast mr-1"></i>Ready to Dispatch</span>';
+                } else if (o.status === 'Rejected') {
+                    statusBadge = '<span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800"><i class="fa-solid fa-xmark mr-1"></i>Rejected</span>';
+                }
+
+                return `
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="font-mono font-bold text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-md"><i class="fa-solid fa-barcode mr-1"></i>${o.trackingNo}</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${o.type.includes('Custom') ? 'bg-indigo-100 text-indigo-800' : 'bg-brand-100 text-brand-800'}">${o.type}</span>
+                            ${statusBadge}
+                        </div>
+                        <span class="text-xs text-slate-400">${o.date}</span>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-slate-900 text-sm">${o.customerName} (<a href="tel:${o.customerPhone}" class="text-brand-600 hover:underline">${o.customerPhone}</a>)</h5>
+                        <p class="text-xs text-slate-600 bg-white p-3 rounded-xl border border-slate-100 mt-1.5"><strong>Details/Items:</strong> ${o.details}</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs pt-1 gap-2">
+                        <span class="text-slate-500">Address: ${o.customerAddress}</span>
+                        ${o.amount > 0 ? `<span class="font-bold text-brand-600 text-sm">Total: ₹${o.amount}</span>` : '<span class="text-amber-600 font-semibold">Custom Quote</span>'}
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between pt-2 border-t border-slate-200 gap-2">
+                        ${o.file ? `<a href="${o.file}" download="customer-attachment" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg text-xs font-semibold transition"><i class="fa-solid fa-download"></i> Download Attached File</a>` : '<span></span>'}
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <button onclick="updateOrderStatus(${o.id}, 'Confirmed')" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer shadow-sm">
+                                <i class="fa-solid fa-check"></i> Confirm
+                            </button>
+                            <button onclick="updateOrderStatus(${o.id}, 'Ready to Dispatch')" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer shadow-sm">
+                                <i class="fa-solid fa-truck-fast"></i> Dispatch
+                            </button>
+                            <button onclick="updateOrderStatus(${o.id}, 'Rejected')" class="px-3 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer shadow-sm">
+                                <i class="fa-solid fa-xmark"></i> Reject
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function updateOrderStatus(orderId, status) {
+            const order = storeOrders.find(o => o.id === orderId);
+            if (!order) return;
+
+            order.status = status;
+            localStorage.setItem('sandeep_store_orders', JSON.stringify(storeOrders));
+            renderAdminOrdersReport();
+
+            let cleanPhone = order.customerPhone.replace(/\D/g, '');
+            if (cleanPhone.length === 10) {
+                cleanPhone = '91' + cleanPhone;
+            }
+
+            // Check if this order contains any downloadable file from products
+            let downloadSectionText = "";
+            if (status === 'Confirmed') {
+                let matchedDownloadLink = "";
+                if (order.details) {
+                    for (let p of products) {
+                        if (order.details.includes(p.title) && p.downloadFile) {
+                            matchedDownloadLink = p.downloadFile;
+                            break;
+                        }
+                    }
+                }
+                if (matchedDownloadLink) {
+                    downloadSectionText = `📥 *Your Downloadable File Link:*\n${matchedDownloadLink}\n`;
+                }
+            }
+
+            let msg = "";
+            if (status === 'Confirmed') {
+                msg = shopSettings.templateConfirmed || defaultSettings.templateConfirmed;
+                msg = msg.replace(/{customerName}/g, order.customerName)
+                         .replace(/{shopName}/g, shopSettings.shopName)
+                         .replace(/{trackingNo}/g, order.trackingNo || 'SCP-' + order.id)
+                         .replace(/{amount}/g, order.amount > 0 ? order.amount : "0")
+                         .replace(/{downloadSection}/g, downloadSectionText);
+            } else if (status === 'Ready to Dispatch') {
+                msg = shopSettings.templateDispatched || defaultSettings.templateDispatched;
+                msg = msg.replace(/{customerName}/g, order.customerName)
+                         .replace(/{shopName}/g, shopSettings.shopName)
+                         .replace(/{trackingNo}/g, order.trackingNo || 'SCP-' + order.id);
+            } else {
+                msg = shopSettings.templateRejected || defaultSettings.templateRejected;
+                msg = msg.replace(/{customerName}/g, order.customerName)
+                         .replace(/{trackingNo}/g, order.trackingNo || 'SCP-' + order.id)
+                         .replace(/{shopName}/g, shopSettings.shopName);
+            }
+
+            const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+            window.open(waUrl, '_blank');
+            showToast(`Order marked as ${status} & WhatsApp message ready!`);
+        }
+
+        function loadShopSettingsToForm() {
+            document.getElementById('setting-shop-name').value = shopSettings.shopName || "";
+            document.getElementById('setting-phone').value = shopSettings.phone || "";
+            document.getElementById('setting-email').value = shopSettings.email || "";
+            document.getElementById('setting-pin').value = shopSettings.adminPin || "";
+            document.getElementById('setting-address').value = shopSettings.address || "";
+            document.getElementById('setting-timings').value = shopSettings.timings || "8:00 AM - 8:00 PM (Mon - Sat)";
+            document.getElementById('setting-template-confirmed').value = shopSettings.templateConfirmed || defaultSettings.templateConfirmed;
+            document.getElementById('setting-template-dispatched').value = shopSettings.templateDispatched || defaultSettings.templateDispatched;
+            document.getElementById('setting-template-rejected').value = shopSettings.templateRejected || defaultSettings.templateRejected;
+        }
+
+        function saveShopSettings() {
+            const shopName = document.getElementById('setting-shop-name')?.value.trim();
+            const phone = document.getElementById('setting-phone')?.value.trim();
+            const email = document.getElementById('setting-email')?.value.trim();
+            const adminPin = document.getElementById('setting-pin')?.value.trim();
+            const address = document.getElementById('setting-address')?.value.trim();
+            const timings = document.getElementById('setting-timings')?.value.trim();
+            const templateConfirmed = document.getElementById('setting-template-confirmed')?.value.trim();
+            const templateDispatched = document.getElementById('setting-template-dispatched')?.value.trim();
+            const templateRejected = document.getElementById('setting-template-rejected')?.value.trim();
+
+            if (!shopName || !phone || !address || !adminPin) {
+                showToast("Please fill in Shop Name, Phone, Address and PIN!", "error");
+                return;
+            }
+
+            shopSettings = {
+                shopName,
+                phone,
+                displayPhone: `+91 ${phone.replace(/^91/, '')}`,
+                email,
+                adminPin,
+                address,
+                timings: timings || "8:00 AM - 8:00 PM (Mon - Sat)",
+                templateConfirmed: templateConfirmed || defaultSettings.templateConfirmed,
+                templateDispatched: templateDispatched || defaultSettings.templateDispatched,
+                templateRejected: templateRejected || defaultSettings.templateRejected
+            };
+
+            localStorage.setItem('sandeep_shop_settings', JSON.stringify(shopSettings));
+            applyShopSettingsToUI();
+            showToast("Shop settings & timings saved successfully!");
+        }
+    </script>
+</body>
+</html>
